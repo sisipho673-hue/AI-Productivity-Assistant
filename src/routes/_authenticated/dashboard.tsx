@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Mail, FileText, CalendarCheck, Library, MessageSquare, Sparkles } from "lucide-react";
 import { AiDisclaimer } from "@/components/ai-disclaimer";
 
-export const Route = createFileRoute("/_authenticated/")({
+export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
 });
 
