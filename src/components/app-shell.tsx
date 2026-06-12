@@ -1,6 +1,6 @@
 import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
-import { LayoutDashboard, Mail, FileText, CalendarCheck, Library, MessageSquare, LogOut, Sparkles, Menu, X } from "lucide-react";
+import { LayoutDashboard, Mail, FileText, CalendarCheck, Library, MessageSquare, Briefcase, LogOut, Sparkles, Menu, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 const NAV = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/email", label: "Email Generator", icon: Mail },
+  { to: "/job-description", label: "Job Descriptions", icon: Briefcase },
   { to: "/notes", label: "Meeting Notes", icon: FileText },
   { to: "/planner", label: "Task Planner", icon: CalendarCheck },
   { to: "/research", label: "HR Research", icon: Library },

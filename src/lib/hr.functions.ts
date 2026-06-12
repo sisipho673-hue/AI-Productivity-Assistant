@@ -80,6 +80,52 @@ export const hrResearch = createServerFn({ method: "POST" })
     return { text: await runPrompt(system, prompt) };
   });
 
+const JdInput = z.object({
+  title: z.string().min(1).max(200),
+  department: z.string().max(100).optional().default(""),
+  seniority: z.string().min(1).max(50),
+  employmentType: z.string().min(1).max(50),
+  location: z.string().min(1).max(150),
+  responsibilities: z.string().max(3000).optional().default(""),
+  requiredSkills: z.string().max(2000).optional().default(""),
+  niceToHaves: z.string().max(2000).optional().default(""),
+  salaryRange: z.string().max(120).optional().default(""),
+  companyBlurb: z.string().max(2000).optional().default(""),
+  tone: z.string().min(1).max(50),
+});
+
+export const generateJobDescription = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => JdInput.parse(d))
+  .handler(async ({ data }) => {
+    const system = `You are an expert HR talent partner who writes polished, inclusive, bias-free job descriptions. Follow modern DEI best practices: gender-neutral language, no coded terms (e.g., "rockstar", "ninja"), focus on outcomes over years-of-experience when possible, and clear, scannable structure. Never invent legal commitments.`;
+    const prompt = `Write a complete job description in markdown.
+
+Role title: ${data.title}
+Department: ${data.department || "(unspecified)"}
+Seniority: ${data.seniority}
+Employment type: ${data.employmentType}
+Location / remote mode: ${data.location}
+Tone: ${data.tone}
+Company blurb: ${data.companyBlurb || "(none — write a brief neutral placeholder)"}
+Salary range: ${data.salaryRange || "(omit if empty)"}
+Key responsibilities (raw): ${data.responsibilities || "(infer reasonable ones)"}
+Required skills (raw): ${data.requiredSkills || "(infer reasonable ones)"}
+Nice-to-haves (raw): ${data.niceToHaves || "(infer reasonable ones)"}
+
+Return markdown with these sections in order:
+# {Role title}
+## About the Role
+## Key Responsibilities (bulleted)
+## Required Qualifications (bulleted)
+## Nice to Have (bulleted)
+## What We Offer (bulleted)
+## Equal Opportunity Statement
+
+End with a short italic note reminding the reader to have legal/HR review the final posting.`;
+    return { text: await runPrompt(system, prompt) };
+  });
+
 // --- Chat threads ---
 
 export const listThreads = createServerFn({ method: "GET" })
