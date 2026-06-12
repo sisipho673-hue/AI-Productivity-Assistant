@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedResearchRouteImport } from './routes/_authenticated/research'
 import { Route as AuthenticatedPlannerRouteImport } from './routes/_authenticated/planner'
 import { Route as AuthenticatedNotesRouteImport } from './routes/_authenticated/notes'
+import { Route as AuthenticatedJobDescriptionRouteImport } from './routes/_authenticated/job-description'
 import { Route as AuthenticatedEmailRouteImport } from './routes/_authenticated/email'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedChatRouteImport } from './routes/_authenticated/chat'
@@ -50,6 +51,12 @@ const AuthenticatedNotesRoute = AuthenticatedNotesRouteImport.update({
   path: '/notes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedJobDescriptionRoute =
+  AuthenticatedJobDescriptionRouteImport.update({
+    id: '/job-description',
+    path: '/job-description',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedEmailRoute = AuthenticatedEmailRouteImport.update({
   id: '/email',
   path: '/email',
@@ -83,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/chat': typeof AuthenticatedChatRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/email': typeof AuthenticatedEmailRoute
+  '/job-description': typeof AuthenticatedJobDescriptionRoute
   '/notes': typeof AuthenticatedNotesRoute
   '/planner': typeof AuthenticatedPlannerRoute
   '/research': typeof AuthenticatedResearchRoute
@@ -94,6 +102,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/email': typeof AuthenticatedEmailRoute
+  '/job-description': typeof AuthenticatedJobDescriptionRoute
   '/notes': typeof AuthenticatedNotesRoute
   '/planner': typeof AuthenticatedPlannerRoute
   '/research': typeof AuthenticatedResearchRoute
@@ -108,6 +117,7 @@ export interface FileRoutesById {
   '/_authenticated/chat': typeof AuthenticatedChatRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/email': typeof AuthenticatedEmailRoute
+  '/_authenticated/job-description': typeof AuthenticatedJobDescriptionRoute
   '/_authenticated/notes': typeof AuthenticatedNotesRoute
   '/_authenticated/planner': typeof AuthenticatedPlannerRoute
   '/_authenticated/research': typeof AuthenticatedResearchRoute
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/chat'
     | '/dashboard'
     | '/email'
+    | '/job-description'
     | '/notes'
     | '/planner'
     | '/research'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/email'
+    | '/job-description'
     | '/notes'
     | '/planner'
     | '/research'
@@ -146,6 +158,7 @@ export interface FileRouteTypes {
     | '/_authenticated/chat'
     | '/_authenticated/dashboard'
     | '/_authenticated/email'
+    | '/_authenticated/job-description'
     | '/_authenticated/notes'
     | '/_authenticated/planner'
     | '/_authenticated/research'
@@ -203,6 +216,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedNotesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/job-description': {
+      id: '/_authenticated/job-description'
+      path: '/job-description'
+      fullPath: '/job-description'
+      preLoaderRoute: typeof AuthenticatedJobDescriptionRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/email': {
       id: '/_authenticated/email'
       path: '/email'
@@ -258,6 +278,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedChatRoute: typeof AuthenticatedChatRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedEmailRoute: typeof AuthenticatedEmailRoute
+  AuthenticatedJobDescriptionRoute: typeof AuthenticatedJobDescriptionRoute
   AuthenticatedNotesRoute: typeof AuthenticatedNotesRoute
   AuthenticatedPlannerRoute: typeof AuthenticatedPlannerRoute
   AuthenticatedResearchRoute: typeof AuthenticatedResearchRoute
@@ -267,6 +288,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChatRoute: AuthenticatedChatRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedEmailRoute: AuthenticatedEmailRoute,
+  AuthenticatedJobDescriptionRoute: AuthenticatedJobDescriptionRoute,
   AuthenticatedNotesRoute: AuthenticatedNotesRoute,
   AuthenticatedPlannerRoute: AuthenticatedPlannerRoute,
   AuthenticatedResearchRoute: AuthenticatedResearchRoute,

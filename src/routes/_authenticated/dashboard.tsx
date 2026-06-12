@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Mail, FileText, CalendarCheck, Library, MessageSquare, Sparkles } from "lucide-react";
+import { Mail, FileText, CalendarCheck, Library, MessageSquare, Briefcase, Sparkles } from "lucide-react";
 import { AiDisclaimer } from "@/components/ai-disclaimer";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -8,6 +8,7 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 
 const TILES = [
   { to: "/email", icon: Mail, title: "HR Email Generator", desc: "Draft emails for recruitment, onboarding, reviews, and more." },
+  { to: "/job-description", icon: Briefcase, title: "Job Description Generator", desc: "Inclusive, structured JDs from a few inputs." },
   { to: "/notes", icon: FileText, title: "Meeting Notes Summarizer", desc: "Turn raw notes into action items and decisions." },
   { to: "/planner", icon: CalendarCheck, title: "Task Planner & Scheduler", desc: "Daily, weekly, or monthly HR work plans." },
   { to: "/research", icon: Library, title: "HR Research Assistant", desc: "Policies, labor laws, engagement and wellness insights." },
